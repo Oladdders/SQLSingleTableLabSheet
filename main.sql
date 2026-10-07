@@ -36,3 +36,32 @@ INSERT INTO pet (name, owner, species, sex, checkups, birth, death) VALUES
 -- View all records
 SELECT * FROM pet;
 
+-- Return where sex = m
+SELECT * FROM pet where sex = 'm';
+
+-- Owners of male pets
+SELECT owner FROM pet where sex = 'm';
+
+-- Remove Benny duplicate
+SELECT DISTINCT owner FROM pet where sex = 'm';
+
+-- Filter columns and rows returned
+SELECT name, species, sex FROM pet WHERE species = 'snake' OR species = 'bird';
+
+-- Q1-1. The names of owners and their pet's name for all pets who are female
+SELECT owner, name FROM pet where sex = 'f';
+
+-- Q1-2. The names and birth dates of pets which are dogs
+SELECT name, birth FROM pet where species = 'dog';
+
+-- Q1-3. The names of the owners of birds.
+SELECT owner FROM pet where species = 'bird';
+
+-- Q1-4. The species of pets who are female.
+SELECT species FROM pet where sex = 'female';
+
+-- Q1-5. The names and birth dates of pets which are cats or birds.
+SELECT name, birth FROM pet where species = 'cat' OR species = 'bird';
+
+-- Q1-6. The names and species of pets which are cats or birds and which are female.
+SELECT name, species FROM pet where species = 'cat' OR species = 'bird' AND sex = 'f'; 
