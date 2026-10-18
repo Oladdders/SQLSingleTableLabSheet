@@ -82,7 +82,46 @@ SELECT name FROM pet WHERE name NOT LIKE '%fy';
 SELECT name FROM pet WHERE LENGTH(owner) = 4;
 
 -- Q2-5. All owners whose names begin and end with one of the first five letters of the alphabet
-SELECT owner FROM pet WHERE owner GLOB '[a-eA-E]*[a-eA-E]';
-
 -- Q2-6. Repeat the previous query, but make the query sensitive to the case of letters of the alphabet the
 -- characters in the name
+SELECT owner FROM pet WHERE owner GLOB '[a-eA-E]*[a-eA-E]';
+
+-- Q3-1. The average number of check-ups that each owner has made with their pets
+SELECT Owner, AVG(checkups) AS avg_checkups
+FROM pet
+GROUP BY owner;
+
+-- Q3-2. The number of pets of each species in ascending order
+SELECT species, COUNT(species) as species_total 
+FROM pet
+GROUP BY species
+ORDER BY species_total ASC;
+
+-- Q3-3. The number of pets of each species that each owner has
+SELECT owner, species, COUNT(*) AS total_pets
+FROM pet
+GROUP BY owner, species;
+
+-- Q3-4. The number of distinct species of pet each owner has
+SELECT owner, COUNT(DISTINCT species) AS distinct_species_count
+FROM pet
+GROUP BY owner;
+
+-- Q3-5. The number of pets of each gender there are in the database, 
+-- where the gender is known
+SELECT sex, COUNT(sex) AS pet_genders
+FROM pet
+WHERE sex IS NOT NULL AND sex != ''
+GROUP BY sex;
+
+-- Q3-6. The number of birds each owner has
+SELECT owner, COUNT(*) AS bird_count
+FROM pet
+WHERE species = 'bird'
+GROUP BY owner;
+
+-- Q3-7. The total number of check-ups each owner has made with all their pets
+SELECT owner, SUM(checkups) AS total_checkups
+FROM pet
+GROUP BY owner
+ORDER BY total_checkups ASC;
